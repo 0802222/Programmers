@@ -2,21 +2,24 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int[] numbers) {
-        Set<Integer> set = new HashSet<>();
+        ArrayList<Integer> list = new ArrayList<>();
         
-        for (int i = 0; i < numbers.length; i++) {
+        for (int i = 0; i < numbers.length - 1; i++) {
             for (int j = i + 1; j < numbers.length; j++) {
-                set.add(numbers[i] + numbers[j]);
+                int sum = numbers[i] + numbers[j];
+                
+                if (!list.contains(sum)) {
+                    list.add(sum);
+                }
             }
         }
+        Collections.sort(list);
         
-        int[] answer = new int[set.size()];
-        int idx = 0;
-        for (int num : set) {
-            answer[idx++] = num;
+        int[] answer = new int[list.size()];
+        
+        for (int i = 0; i < list.size(); i++) {
+            answer[i] = list.get(i);
         }
-        
-        Arrays.sort(answer);
         return answer;
     }
 }
